@@ -1,0 +1,153 @@
+person.sozdatel:
+  icon: mdi:bike
+air_quality.xiaomi_miio_air_quality_monitor:
+  icon: mdi:bacteria
+  unit_of_measurement: μg/m³
+sensor.purifier_aqi:
+  friendly_name: PM 2.5
+  icon: mdi:molecule
+  unit_of_measurement: μg/m³
+sensor.purifier_temperature:
+  device_class: temperature
+  unit_of_measurement: °C
+sensor.purifier_humidity:
+  device_class: humidity
+  unit_of_measurement: '%'
+sensor.sauresha_contr_840d8e9dd678:
+  friendly_name: Контроллер
+media_player.cinemood_012896:
+  friendly_name: Ам-ням
+  icon: mdi:projector
+sensor.purifier_filter_life_remaining:
+  icon: mdi:air-filter
+sensor.purifier_filter_hours_used:
+  icon: mdi:recycle
+sensor.monitor_tvoc:
+  icon: mdi:test-tube
+  unit_of_measurement: mg/m³
+sensor.monitor_co2:
+  icon: mdi:thought-bubble
+sensor.humidifier_humidity:
+  device_class: humidity
+sensor.humidifier_temperature:
+  device_class: temperature
+fan.xiaomi_miio_device_2:
+  friendly_name: Влажник
+sensor.humidifier_water_level:
+  icon: mdi:beaker-outline
+plant.mini_rose:
+  friendly_name: Цытошек
+  icon: mdi:flower
+sensor.processor_use:
+  friendly_name: Загрузка CPU
+  icon: mdi:chip
+sensor.cpu_temperature:
+  friendly_name: Температура CPU
+sensor.dbsize:
+  friendly_name: Размер БД
+  icon: mdi:database
+sensor.disk_free:
+  friendly_name: Свободно на диске
+sensor.disk_use_percent:
+  friendly_name: Используется диска
+sensor.disk_use:
+  friendly_name: Занято на диске
+sensor.ipv4_address_wlo1:
+  friendly_name: IPv4 адрес
+sensor.last_boot:
+  friendly_name: Последний перезапуск
+  icon: mdi:restart
+sensor.memory_free:
+  friendly_name: Свободная памать
+sensor.memory_use:
+  friendly_name: Занято памяти
+sensor.memory_use_percent:
+  friendly_name: Используется памяти
+sensor.network_in_wlo1:
+  friendly_name: Получено
+sensor.network_out_wlo1:
+  friendly_name: Отправленно
+sensor.moon:
+  friendly_name: Луна
+sun.sun:
+  friendly_name: Солнце
+plant.chlorophytum:
+  friendly_name: Игорь
+  icon: mdi:sprout
+sensor.hall_humidity:
+  friendly_name: Сырость в зале
+sensor.hall_temperature:
+  friendly_name: Градусник в зале
+media_player.yandex_station_04107884c914541e038f:
+  icon: yandex:station
+sensor.monitor_pm2_5:
+  icon: mdi:molecule
+sensor.start_time:
+  friendly_name: Запуск HASSIO
+device_tracker.life360_zheka:
+  friendly_name: Жека
+device_tracker.life360_vedro:
+  friendly_name: Ведроид
+device_tracker.life360_princess:
+  friendly_name: Софка
+device_tracker.life360_khren_s_gory:
+  friendly_name: Хрен с горы
+device_tracker.life360_aleksandr_privezentsev:
+  friendly_name: Тигра
+sensor.hd_temperature_dev_sda:
+  friendly_name: SSD
+sensor.hd_temperature_dev_sdb:
+  friendly_name: HDD
+sensor.daily_db:
+  friendly_name: БД за день
+script.yandex_tts_0:
+  icon: mdi:thermometer
+sensor.russia_coronavirus_confirmed:
+  icon: mdi:bacteria-outline
+  unit_of_measurement: чел.
+sensor.russia_coronavirus_current:
+  icon: mdi:biohazard
+  unit_of_measurement: чел.
+sensor.russia_coronavirus_deaths:
+  icon: mdi:account-minus
+  unit_of_measurement: чел.
+sensor.russia_coronavirus_recovered:
+  icon: mdi:bottle-tonic-plus-outline
+  unit_of_measurement: чел.
+sensor.seventeentrack_packages_delivered:
+  attribution: Data provided by 17track.net
+  friendly_name: Доставлено
+  icon: mdi:package-variant
+sensor.seventeentrack_packages_ready_to_be_picked_up:
+  friendly_name: Готов к выдаче
+  icon: mdi:mailbox-up
+sensor.seventeentrack_packages_in_transit:
+  friendly_name: В пути
+  icon: mdi:truck
+sensor.seventeentrack_packages_undelivered:
+  friendly_name: Не доставлено
+  icon: mdi:close-circle
+sensor.seventeentrack_packages_returned:
+  friendly_name: Возврат
+  icon: mdi:backspace
+sensor.seventeentrack_packages_not_found:
+  friendly_name: Не нейдено
+  icon: mdi:email-search
+sensor.daily_virus_karantin:
+  unit_of_measurement: чел.
+sensor.monitor_humidity:
+  device_class: humidity
+device_tracker.life360_iarik:
+  friendly_name: Ярик
+zone.home:
+  icon: mdi:home-modern
+script.yandex_tts_temp_hall:
+  icon: mdi:home-thermometer-outline
+script.yandexx_tts_kettle_on:
+  icon: mdi:kettle-steam-outline
+script.yandex_tts_virus_megaphone:
+  icon: mdi:bullhorn
+binary_sensor.iss:
+  icon: mdi:satellite-variant
+sensor.yandex_covid:
+  icon: mdi:bacteria-outline

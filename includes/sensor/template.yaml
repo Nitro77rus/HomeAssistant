@@ -1,0 +1,140 @@
+# Шаблоны
+  - platform: template
+
+# Воздухан  
+    sensors:
+      purifier_fan_mode:
+        friendly_name: "Mode"
+        value_template: "{{ state_attr('fan.xiaomi_airpurifier', 'speed') }}"
+      purifier_fan_speed:
+        friendly_name: "Motor speed"
+        unit_of_measurement: 'rpm'
+        value_template: "{{ state_attr('fan.xiaomi_airpurifier', 'motor_speed') }}"
+      purifier_temperature:
+        friendly_name: "Температура"
+        unit_of_measurement: '°C'
+        value_template: "{{ state_attr('fan.xiaomi_airpurifier', 'temperature') }}"
+      purifier_humidity:
+        friendly_name: "Влажность"
+        unit_of_measurement: '%'
+        value_template: "{{ state_attr('fan.xiaomi_airpurifier', 'humidity') }}"
+      purifier_aqi:
+        friendly_name: "PM 2.5"
+        unit_of_measurement: 'μg/m3'
+        value_template: "{{ state_attr('fan.xiaomi_airpurifier', 'aqi') }}"
+      purifier_favspeed:
+        friendly_name: "Favourite Level"
+        value_template: "{{ state_attr('fan.xiaomi_airpurifier', 'favorite_level') }}"
+      purifier_filter_hours_used:
+        friendly_name: "Отработано"
+        unit_of_measurement: 'ч'
+        value_template: "{{ state_attr('fan.xiaomi_airpurifier', 'filter_hours_used') }}"
+      purifier_filter_life_remaining:
+        friendly_name: "Фильтр"
+        unit_of_measurement: '%'
+        value_template: "{{ state_attr('fan.xiaomi_airpurifier', 'filter_life_remaining') }}"
+      purifier_child_lock:
+        friendly_name: "Child Lock"
+        value_template: "{{ state_attr('fan.xiaomi_airpurifier', 'child_lock') }}"
+      purifier_display:
+        friendly_name: "Display"
+        value_template: "{{ state_attr('fan.xiaomi_airpurifier', 'led') }}"
+      purifier_buzzer:
+        friendly_name: "Buzzer"
+        value_template: "{{ state_attr('fan.xiaomi_airpurifier', 'buzzer') }}"
+
+# Влажник         
+      humidifier_temperature:
+        friendly_name: "Температура"
+        unit_of_measurement: '°C'
+        value_template: "{{ state_attr('fan.xiaomi_humidifier', 'temperature') }}"
+      humidifier_humidity:
+        friendly_name: "Влажность"
+        unit_of_measurement: '%'
+        value_template: "{{ state_attr('fan.xiaomi_humidifier', 'humidity') }}"
+      humidifier_water_level:
+        friendly_name: "Уровень воды"
+        unit_of_measurement: '%'
+        value_template: "{{ [state_attr('fan.xiaomi_humidifier', 'depth') / 1.2, 100] | min | int }}"
+
+# Монитор воздуха
+      monitor_pm2_5:
+        friendly_name: "PM 2.5"
+        unit_of_measurement: 'μg/m3'
+        value_template: "{{ state_attr('air_quality.xiaomi_airmonitor', 'particulate_matter_2_5') }}"
+      monitor_co2:
+        friendly_name: "CO2a"
+        unit_of_measurement: 'ppm'
+        value_template: "{{ state_attr('air_quality.xiaomi_airmonitor', 'carbon_dioxide_equivalent') }}"
+      monitor_tvoc:
+        friendly_name: "TVOC"
+        unit_of_measurement: 'mg/m3'
+        value_template: "{{ state_attr('air_quality.xiaomi_airmonitor', 'total_volatile_organic_compounds') }}"
+      monitor_humidity:
+        friendly_name: "Влажность"
+        unit_of_measurement: '%'
+        value_template: "{{ state_attr('air_quality.xiaomi_airmonitor', 'humidity') }}"
+      monitor_temperature:
+        friendly_name: "Температура"
+        unit_of_measurement: '°C'
+        value_template: "{{ state_attr('air_quality.xiaomi_airmonitor', 'temperature') }}"
+
+# Yandex COVID-19
+      covid_russia_cases:
+        friendly_name: Заражений в России
+        icon_template: mdi:biohazard
+        unit_of_measurement: чел.
+        value_template: "{{ state_attr('sensor.yandex_covid', 'Россия')['cases'] }}"
+      covid_russia_cured:
+        friendly_name: Выздоровлений в России
+        icon_template: mdi:bottle-tonic-plus-outline
+        unit_of_measurement: чел.
+        value_template: "{{ state_attr('sensor.yandex_covid', 'Россия')['cured'] }}"
+      covid_russia_deaths:
+        friendly_name: Смертей в России
+        icon_template: mdi:account-minus
+        unit_of_measurement: чел.
+        value_template: "{{ state_attr('sensor.yandex_covid', 'Россия')['deaths'] }}"
+      covid_russia_new_cases:
+        friendly_name: Новых случаев в России
+        icon_template: mdi:bacteria-outline
+        unit_of_measurement: чел.
+        value_template: "{{ state_attr('sensor.yandex_covid', 'Россия')['new_cases'] }}"
+      covid_russia_tests:
+        friendly_name: Проведено тестов в России
+        icon_template: mdi:test-tube
+        unit_of_measurement: чел.
+        value_template: "{{ state_attr('sensor.yandex_covid', 'Россия')['tests'] }}"
+
+      covid_moscow_cases:
+        friendly_name: Заражений в Москве
+        icon_template: mdi:biohazard
+        unit_of_measurement: чел.
+        value_template: "{{ state_attr('sensor.yandex_covid', 'Москва')['cases'] }}"
+      covid_moscow_cured:
+        friendly_name: Выздоровлений в Москве
+        icon_template: mdi:bottle-tonic-plus-outline
+        unit_of_measurement: чел.
+        value_template: "{{ state_attr('sensor.yandex_covid', 'Москва')['cured'] }}"
+      covid_moscow_deaths:
+        friendly_name: Смертей в Москве
+        icon_template: mdi:account-minus
+        unit_of_measurement: чел.
+        value_template: "{{ state_attr('sensor.yandex_covid', 'Москва')['deaths'] }}"
+      covid_moscow_isolation:
+        friendly_name: Индекс самоизоляции Москвы
+        icon_template: mdi:home-lock
+        unit_of_measurement: " "
+        value_template: "{{ state_attr('sensor.yandex_covid', 'Москва')['isolation'] }}"
+
+#Чайничег
+      # energy_kettle:
+      #   friendly_name: "Электроэнергия"
+      #   unit_of_measurement: 'кВт/ч'
+      #   icon_template: mdi:flash
+      #   value_template: "{{ state_attr('sensor.redmondsensors', 'energy spent')|replace(' kW * h','') }}"
+      # on_kettle:
+      #   friendly_name: "Включений"
+      #   unit_of_measurement: 'раз(а)'
+      #   icon_template: mdi:flash
+      #   value_template: "{{ state_attr('sensor.redmondsensors', 'amount of starts')|replace(' times','') }}"

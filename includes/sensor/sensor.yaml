@@ -1,0 +1,74 @@
+# Контроллер SAURES
+  - platform: sauresha
+    email: !secret saures_login
+    password: !secret saures_password
+    flat_id: 7087
+    scan_interval:
+      minutes: 20
+    counters_sn: 
+      - 08-0080722
+      - 08-0080555
+    controllers_sn: 
+      - 840D8E9DD678
+
+# Moon fase
+  - platform: moon
+
+# Цытошек
+  - platform: miflora
+    mac: '80:EA:CA:88:EB:60'
+    name: Chlorophytum
+    force_update: true
+    median: 3
+    monitored_conditions:
+      - moisture
+      - light
+      - temperature
+      - conductivity
+      - battery
+
+# Data & Time
+  - platform: time_date
+    display_options:
+      - 'time'
+      - 'date'
+      - 'date_time'
+      - 'date_time_utc'
+      - 'date_time_iso'
+      - 'time_date'
+      - 'time_utc'
+      - 'beat'
+
+# Время старта HASSIO
+  - platform: start_time
+
+# 17track
+  - platform: seventeentrack
+    username: !secret pochta17_log
+    password: !secret pochta17_pass
+
+# Яндекс.Транспорт
+  - platform: yandex_transport
+    name: Bus to Vegas
+    stop_id: 9645351
+    routes:
+      - 717
+      - 37
+  # - platform: yandex_transport
+  #   name: Из Депо
+  #   stop_id: 3706997414
+  #   routes:
+  #     - 784
+  - platform: yandex_transport
+    name: В Депо
+    stop_id: 9645708
+    routes:
+      - 784
+
+# Yandex COVID-19
+  - platform: yandex_covid
+
+  # - platform: rpi_power
+  #   text_state: true
+
+  - platform: start_time

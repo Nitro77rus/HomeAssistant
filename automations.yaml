@@ -1,0 +1,143 @@
+- id: co2_alert
+  alias: co2
+  description: ''
+  trigger:
+  - above: '1500'
+    entity_id: sensor.monitor_co2
+    for: '10'
+    platform: numeric_state
+  condition: []
+  action:
+  - data:
+      command: sendText
+      devise: Тёткин дом
+      text: Повтори за мной 'Пора проветрить в зале'
+    service: yandex_station.send_command
+  - data:
+      message: Пора проветрить!
+    service: notify.uzerbot
+- id: zapravka_vody
+  alias: Увлажнитель
+  description: '...заправка'
+  trigger:
+  - below: '25'
+    entity_id: sensor.humidifier_water_level
+    for: '10'
+    platform: numeric_state
+  condition: []
+  action:
+  - data: {}
+    service: script.yandex_tts_water_hum_megaphone
+  - data:
+      message: Ай нииид Ватер!
+    service: notify.uzerbot
+- id: vlazhnost_norm
+  alias: Влажность норм
+  description: ''
+  trigger:
+  - above: '55'
+    below: '100'
+    entity_id: sensor.hall_humidity
+    platform: numeric_state
+  condition:
+  - condition: or
+    conditions:
+    - after: sunset
+      condition: sun
+    - before: sunrise
+      condition: sun
+  action:
+  - data:
+      rgb_color:
+      - 0
+      - 255
+      - 0
+    entity_id: light.zabortnaia
+    service: light.turn_on
+- id: vlazhnost_takoe
+  alias: Влажность такое
+  description: ''
+  trigger:
+  - above: '45'
+    below: '54'
+    entity_id: sensor.hall_humidity
+    platform: numeric_state
+  condition:
+  - condition: or
+    conditions:
+    - after: sunset
+      condition: sun
+    - before: sunrise
+      condition: sun
+  action:
+  - data:
+      rgb_color:
+      - 255
+      - 255
+      - 0
+    entity_id: light.zabortnaia
+    service: light.turn_on
+- id: vlazhnost_fail
+  alias: Влажность не очень
+  description: ''
+  trigger:
+  - above: '35'
+    below: '44'
+    entity_id: sensor.hall_humidity
+    platform: numeric_state
+  condition:
+  - condition: or
+    conditions:
+    - after: sunset
+      condition: sun
+    - before: sunrise
+      condition: sun
+  action:
+  - data:
+      rgb_color:
+      - 255
+      - 165
+      - 0
+    entity_id: light.zabortnaia
+    service: light.turn_on
+- id: vlazhnost_net
+  alias: Влажность НЕТ
+  description: ''
+  trigger:
+  - above: '0'
+    below: '34'
+    entity_id: sensor.hall_humidity
+    platform: numeric_state
+  condition:
+  - condition: or
+    conditions:
+    - after: sunset
+      condition: sun
+    - before: sunrise
+      condition: sun
+  action:
+  - data:
+      rgb_color:
+      - 255
+      - 0
+      - 0
+    entity_id: light.zabortnaia
+    service: light.turn_on
+- id: coronavirus_news
+  alias: Coronavirus News
+  trigger:
+  - entity_id: sensor.russia_coronavirus_confirmed
+    platform: state
+  action:
+  - service: script.yandex_tts_virus_megaphone
+  - service: script.telegram_bot_virus_news
+  initial_state: 'true'
+- id: letsencrypt-renewal
+  alias: Let's Encrypt Renewal
+  trigger:
+  - platform: time
+    at: 00:00:00
+  action:
+  - service: hassio.addon_restart
+    data:
+      addon: core_letsencrypt

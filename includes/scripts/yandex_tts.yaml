@@ -1,0 +1,89 @@
+# yandex_tts_temp_hall:
+#   alias: Климат ин да хом
+#   sequence:
+#   - service: media_player.play_media
+#     data_template:
+#       entity_id: media_player.yandex_station_04107884c914541e038f
+#       media_content_id: Температура в зале {{ states("sensor.hall_temperature") |round|numword('градус') }} sil<[150]>влажность {{ states("sensor.hall_humidity") |numword('процент') }} sil<[200]> в детской {{ states("sensor.xiaomi_cgg1_temperature") |round|numword('градус') }} sil<[150]> влажность {{ states("sensor.xiaomi_cgg1_humidity") |numword('процент') }} sil<[200]> а за бортом {{ states("sensor.outdoor_temperature") |round|numword('градус') }} sil<[150]> влажность {{ states("sensor.outdoor_humidity") |numword('процент') }} sil<[150]>  давление {{ states("sensor.kitchen_pressure") |numword('миллиметр') }} ртутного столба
+#       media_content_type: dialog 
+
+yandex_tts_water_hum_megaphone:
+  alias: Увлажнитель (Рупор)
+  sequence:
+  - service: media_player.play_media
+    data:
+      entity_id: media_player.yandex_station_04107884c914541e038f
+      media_content_id: <speaker effect="megaphone">Хозяин sil<[100]> заправь увлажнитель.
+      media_content_type: dialog 
+
+yandex_tts_virus:
+  alias: Coronovirus proof
+  sequence:
+  - service: media_player.play_media
+    data_template:
+      entity_id: media_player.yandex_station_04107884c914541e038f
+      media_content_id: Заболевших короновирусом в России теперь {{ states("sensor.russia_coronavirus_confirmed") }}sil<[150]> из них {{ states("sensor.russia_coronavirus_current") }} больны и {{ states("sensor.russia_coronavirus_recovered") }} вылечены.
+      media_content_type: dialog 
+
+yandex_tts_virus_megaphone:
+  alias: Coronovirus proof (Рупор)
+  sequence:
+  - service: media_player.play_media
+    data_template:
+      entity_id: media_player.yandex_station_04107884c914541e038f
+      media_content_id: <speaker effect="megaphone">Вниманиеsil<[150]>Заболевших короновирусом в России теперь {{ states("sensor.russia_coronavirus_confirmed") }} sil<[150]> из них {{ states("sensor.russia_coronavirus_current") }} больны и {{ states("sensor.russia_coronavirus_recovered") }} вылечены.
+      media_content_type: dialog
+
+yandex_tts_virus_first:
+  alias: Coronovirus First Blood (Рупор)
+  sequence:
+  - service: media_player.play_media
+    data_template:
+      entity_id: media_player.yandex_station_04107884c914541e038f
+      media_content_id: <speaker effect="megaphone">Вниманиеsil<[150]>Внимание sil<[250]>Первая смерть от короновирусом в России
+      media_content_type: dialog
+
+yandexx_tts_pl_alisa:
+  alias: Плейлист с Алисой
+  sequence:
+    - service: media_player.play_media
+      entity_id: media_player.yandex_station_04107884c914541e038f
+      data:
+        media_content_id: Перемешай плейлист с Алисой
+        media_content_type: command
+
+yandexx_tts_pl_day:
+  alias: Плейлист дня
+  sequence:
+    - service: media_player.play_media
+      entity_id: media_player.yandex_station_04107884c914541e038f
+      data:
+        media_content_id: Перемешай плейлист дня
+        media_content_type: command
+
+yandexx_tts_like:
+  alias: Like
+  sequence:
+    - service: media_player.play_media
+      entity_id: media_player.yandex_station_04107884c914541e038f
+      data:
+        media_content_id: Поставь лайк
+        media_content_type: command
+
+yandexx_tts_dislike:
+  alias: Dislike
+  sequence:
+    - service: media_player.play_media
+      entity_id: media_player.yandex_station_04107884c914541e038f
+      data:
+        media_content_id: Не нравится
+        media_content_type: command
+
+yandexx_tts_kettle_on:
+  alias: Включить чайник
+  sequence:
+    - service: media_player.play_media
+      entity_id: media_player.yandex_station_04107884c914541e038f
+      data:
+        media_content_id: Включи чайник
+        media_content_type: command

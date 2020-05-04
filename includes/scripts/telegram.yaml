@@ -1,0 +1,15 @@
+telegram_bot_data:
+  alias: Данные в Телегу (температура/влажность)
+  sequence:
+    - service: notify.uzerbot
+      data_template:
+        title: '*За бортом*'
+        message: Температура в зале {{ states("sensor.hall_temperature") }} C°, влажность {{ states("sensor.hall_humidity") }}%
+
+telegram_bot_virus_news:
+  alias: Больные в Телегу
+  sequence:
+    - service: notify.uzerbot
+      data_template:
+        title: '*COVID-19 в России*'
+        message: Заболевших короновирусом в России теперь {{ states("sensor.russia_coronavirus_confirmed") }}, из них {{ states("sensor.russia_coronavirus_current") }} больны и {{ states("sensor.russia_coronavirus_recovered") }} вылечены.

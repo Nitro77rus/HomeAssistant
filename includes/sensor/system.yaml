@@ -1,0 +1,49 @@
+# Системный монитор  
+  - platform: systemmonitor
+    resources:
+      - type: disk_use_percent
+        arg: /
+      - type: disk_use
+        arg: /
+      - type: disk_free
+        arg: /
+      - type: memory_free
+      - type: memory_use
+      - type: memory_use_percent
+      - type: processor_use
+      - type: last_boot
+      - type: network_in
+        arg: eth0
+      - type: network_out
+        arg: eth0
+      - type: ipv4_address
+        arg: eth0
+        
+# Time Online
+  - platform: uptime
+    name: Время жизни
+    unit_of_measurement: hours
+      
+  - platform: command_line
+    name: CPU Temperature
+    command: "cat /sys/class/thermal/thermal_zone0/temp"
+    unit_of_measurement: "°C"
+    value_template: '{{ value | multiply(0.001) | round(1) }}'
+# HDDTemp
+  # - platform: hddtemp
+  #   disks:
+  #     - /dev/sda
+  #     - /dev/sdb
+# Speed Fan
+  # - platform: command_line
+  #   name: CPU Fan
+  #   command: "sensors | grep -E 'fan2(.*)min' | cut -c23-28"
+  #   unit_of_measurement: "RPM"
+
+  - platform: sql
+    db_url: mysql://homeassistant:hass@core-mariadb/homeassistant?charset=utf8
+    queries:
+      - name: DBsize
+        query: 'SELECT table_schema "database", Round(Sum(data_length + index_length) / 1024 / 1024, 1) "value" FROM information_schema.tables WHERE table_schema="homeassistant" GROUP BY table_schema;'
+        column: 'value'
+        unit_of_measurement: MB

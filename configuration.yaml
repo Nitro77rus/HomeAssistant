@@ -1,0 +1,233 @@
+
+# Configure a default setup of Home Assistant (frontend, api, etc)
+default_config:
+
+# Uncomment this if you are using SSL/TLS, running in Docker container, etc.
+#http:
+#    base_url: !secret my_www
+#    ssl_certificate: /ssl/fullchain.pem
+#    ssl_key: /ssl/privkey.pem
+
+homeassistant:
+  name: Теремок
+  latitude: !secret latitude_data
+  longitude: !secret longitude_data
+  elevation: 196
+  unit_system: metric
+  time_zone: Europe/Moscow
+
+  customize: !include customize.yaml
+
+automation: !include automations.yaml
+scene: !include scenes.yaml
+zone: !include zone.yaml
+
+group: !include includes/groups.yaml
+recorder: !include includes/recorder.yaml
+
+sensor: !include_dir_merge_list includes/sensor
+script: !include_dir_merge_named  includes/scripts
+
+# mqtt:
+#   broker: localhost
+#   discovery: true
+#   discovery_prefix: homeassistant
+
+# device_tracker:
+#   - platform: bluetooth_tracker
+
+# Темы
+frontend:
+  themes: !include_dir_merge_named themes
+
+# Иконки Яндекса
+  extra_html_url:
+    - /hacsfiles/ha-yandex-icons/yandex-icons.html
+
+# Яндекс Станция
+yandex_station:
+  username: !secret ya_login
+  password: !secret ya_pass
+  tts_service_name: alice_say
+
+# Нумерология
+morph_numbers:
+
+# Text to speech
+tts:
+- platform: google_translate
+  language: ru
+  service_name: google_say
+
+# Telegram Bot
+telegram_bot:
+  - platform: polling
+    proxy_url: socks5h://10.0.1.66:9050
+    api_key: !secret telega_api
+    allowed_chat_ids:
+      - !secret chat_id_first
+      - !secret chat_id_metro_velo
+
+# Notifier
+notify:
+  - name: uZerBot
+    platform: telegram
+    chat_id: !secret chat_id_first
+  - name: Велоклуб ТЧ-7
+    platform: telegram
+    chat_id: !secret chat_id_metro_velo
+
+# Google Events
+google:
+  client_id: !secret google_id
+  client_secret: !secret google_secret
+
+# Качество воздуха
+air_quality:
+  - platform: xiaomi_miio
+    name: Xiaomi AirMonitor
+    host: 10.0.1.90
+    token: 596c57323959454a676a5355306f3131
+
+# airvisual:
+#   api_key: !secret airvisual_api_key
+
+fan:
+# Воздухан    
+  - platform: xiaomi_miio
+    name: Xiaomi AirPurifier
+    host: 10.0.1.91
+    token: e3627665e30d906abc3fbd91fcfba9f2
+
+# Влажник
+  - platform: xiaomi_miio
+    name: Xiaomi Humidifier
+    host: 10.0.1.92
+    token: b98df492d2e53647660d3cc54aabf136
+
+# discovery:
+#   ignore:
+#     - yeelight
+
+# Цветнуха Mi
+yeelight:
+  devices:
+    10.0.1.93:
+      name: Забортная
+      transition: 1000
+      model: color1
+
+# Цветник
+plant:
+  chlorophytum:
+    sensors:
+      moisture: sensor.chlorophytum_moisture
+      battery: sensor.chlorophytum_battery
+      temperature: sensor.chlorophytum_temperature
+      conductivity: sensor.chlorophytum_conductivity
+      brightness: sensor.chlorophytum_light_intensity
+    min_moisture: 15
+    max_moisture: 60
+    min_temperature: 10
+    max_temperature: 32
+    min_conductivity: 200
+    max_conductivity: 1300
+    min_brightness: 500
+    max_brightness: 30000
+  igor:
+    sensors:
+      moisture: sensor.xiaomi_miflora_moisture
+    #   battery: sensor.xiaomi_miflora_battery_level
+      temperature: sensor.xiaomi_miflora_temperature
+      conductivity: sensor.xiaomi_miflora_soil_conductivity
+      brightness: sensor.xiaomi_miflora_illuminance
+    min_moisture: 15
+    max_moisture: 60
+    min_temperature: 10
+    max_temperature: 32
+    min_conductivity: 200
+    max_conductivity: 1300
+    min_brightness: 500
+    max_brightness: 30000
+
+#Пылик
+vacuum:
+  - platform: xiaomi_miio
+    host: 10.0.1.19
+    token: 4b34797150636b4e636330555335476a
+
+# speedtest
+speedtestdotnet:
+  scan_interval:
+    minutes: 30
+  monitored_conditions:
+    - ping
+    - download
+    - upload
+
+# Чайник
+# r4s_kettler:
+#   device: 'hci0'
+#   mac: 'D3:2C:5A:EC:FB:97'
+#   password: 'b54c75b1b40c88ef'
+
+# счётчики
+utility_meter:
+  daily_hot_water:
+    source: sensor.sauresha_7087_080080555
+    cycle: daily
+    offset: '00:00'
+  daily_cold_water:
+    source: sensor.sauresha_7087_080080722
+    cycle: daily
+    offset: '00:00'
+  monthly_hot_water:
+    source: sensor.sauresha_7087_080080555
+    cycle: monthly
+  monthly_cold_water:
+    source: sensor.sauresha_7087_080080722
+    cycle: monthly
+
+  daily_db:
+    source: sensor.dbsize
+    cycle: daily
+    offset: '00:00'
+
+  daily_virus_proof:
+    source: sensor.russia_coronavirus_confirmed
+    cycle: daily
+    offset: '00:00'
+  daily_virus_karantin:
+    source: sensor.russia_coronavirus_current
+    cycle: daily
+    offset: '00:00'
+  daily_virus_recovered:
+    source: sensor.russia_coronavirus_recovered
+    cycle: daily
+    offset: '00:00'
+  daily_virus_deaths:
+    source: sensor.russia_coronavirus_deaths
+    cycle: daily
+    offset: '00:00'
+
+  # daily_kettle_energy:
+  #   source: sensor.energy_kettle
+  #   cycle: daily
+  #   offset: '00:00'
+  # daily_kettle_on:
+  #   source: sensor.on_kettle
+  #   cycle: daily
+  #   offset: '00:00'
+
+camera:
+  - platform: ffmpeg
+    name: Xiaofang
+    input: -rtsp_transport tcp -i rtsp://10.0.1.98:8554/unicast
+
+logger:
+  default: info
+
+# International Space Station
+binary_sensor:
+  - platform: iss
+    show_on_map: true
